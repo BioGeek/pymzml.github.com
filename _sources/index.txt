@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
    :numbered:
-   
+
    intro
    usage
    run
@@ -19,7 +19,7 @@ Contents:
    obo
    plot
    examples
-   
+
 
 Indices and tables
 ==================

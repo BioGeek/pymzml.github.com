@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3. Module Run &mdash; pymzML v0.7.4 documentation</title>
+    <title>3. Module Run &mdash; pymzML 0.7.4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pymzML v0.7.4 documentation" href="index.html" />
+    <link rel="top" title="pymzML 0.7.4 documentation" href="index.html" />
     <link rel="next" title="4. Class Spectrum" href="spec.html" />
     <link rel="prev" title="2. Usage" href="usage.html" /> 
   </head>
@@ -42,7 +45,7 @@
         <li class="right" >
           <a href="usage.html" title="2. Usage"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">pymzML v0.7.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pymzML 0.7.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -64,10 +67,10 @@ if the file if not compressed or truncated by a conversion Program.</p>
 <p>The class <a class="reference internal" href="#run.Writer" title="run.Writer"><tt class="xref py py-class docutils literal"><span class="pre">Writer</span></tt></a> is still in development.</p>
 <dl class="class">
 <dt id="run.Reader">
-<em class="property">class </em><tt class="descclassname">run.</tt><tt class="descname">Reader</tt><a class="headerlink" href="#run.Reader" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">run.</tt><tt class="descname">Reader</tt><a class="reference internal" href="_modules/run.html#Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.Reader" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="function">
 <dt id="run.Reader.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>path*</em><span class="optional">[</span>, <em>noiseThreshold = 0.0</em>, <em>extraAccessions = None</em>, <em>MS1_Precision = 5e-6</em>, <em>MSn_Precision = 20e-6</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#run.Reader.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>path*</em><span class="optional">[</span>, <em>noiseThreshold = 0.0</em>, <em>extraAccessions = None</em>, <em>MS1_Precision = 5e-6</em>, <em>MSn_Precision = 20e-6</em><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/run.html#Reader.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.Reader.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Initializes an mzML run and returns an iterator.</p>
@@ -75,7 +78,7 @@ if the file if not compressed or truncated by a conversion Program.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>path</strong> (<em>string</em>) &#8211; path to mzML file. File can be gzipped.</li>
 <li><strong>extraAccessions</strong> (<em>list of tuples</em>) &#8211; <p>list of additional (accession,fieldName) tuples.</p>
 <p>For example, (&#8216;MS:1000285&#8217;,[&#8216;value&#8217;]) will extract the &#8220;total ion
@@ -102,7 +105,7 @@ Multiple values can be used as input, i.e. ( &#8216;MS:1000016&#8217; , [&#8216;
 </div>
 <dl class="method">
 <dt id="run.Reader.next">
-<tt class="descname">next</tt><big>(</big><big>)</big><a class="headerlink" href="#run.Reader.next" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">next</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/run.html#Reader.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.Reader.next" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterator in class <tt class="xref py py-class docutils literal"><span class="pre">Run</span></tt>:</p>
 <p>will return an instance of <a class="reference internal" href="spec.html#spec.Spectrum" title="spec.Spectrum"><tt class="xref py py-class docutils literal"><span class="pre">spec.Spectrum</span></tt></a>, stored in run.spectrum.</p>
 <p>Example:</p>
@@ -116,10 +119,10 @@ Multiple values can be used as input, i.e. ( &#8216;MS:1000016&#8217; , [&#8216;
 
 <dl class="class">
 <dt id="run.Writer">
-<em class="property">class </em><tt class="descclassname">run.</tt><tt class="descname">Writer</tt><a class="headerlink" href="#run.Writer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">run.</tt><tt class="descname">Writer</tt><a class="reference internal" href="_modules/run.html#Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.Writer" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="function">
 <dt id="run.Writer.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>filename*</em>, <em>run*</em><span class="optional">[</span>, <em>overwrite = boolean</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#run.Writer.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>filename*</em>, <em>run*</em><span class="optional">[</span>, <em>overwrite = boolean</em><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/run.html#Writer.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#run.Writer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>Initializes an mzML writer (beta stage).</p>
@@ -127,7 +130,7 @@ Multiple values can be used as input, i.e. ( &#8216;MS:1000016&#8217; , [&#8216;
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>path</strong> (<em>string</em>) &#8211; filename for the new mzML file.</li>
 <li><strong>run</strong> (<em>pymzml.run.Reader</em>) &#8211; Currently a pymzml.run.Reader object is required since we do not write the header by ourselves, yet.</li>
 <li><strong>overwrite</strong> (<em>boolean</em>) &#8211; force the re-initialization of mzML file, even if file exists.</li>
@@ -168,7 +171,7 @@ Multiple values can be used as input, i.e. ( &#8216;MS:1000016&#8217; , [&#8216;
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -197,12 +200,12 @@ Multiple values can be used as input, i.e. ( &#8216;MS:1000016&#8217; , [&#8216;
         <li class="right" >
           <a href="usage.html" title="2. Usage"
              >previous</a> |</li>
-        <li><a href="index.html">pymzML v0.7.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pymzML 0.7.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
 </html>

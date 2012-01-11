@@ -33,7 +33,7 @@ Please refer to:
     | University of Muenster
     | Germany
     | eMail: christian@fufezan.net
-    | Tel: +049 251 83 26861
+    | Tel: +049 251 83 24861
 
 
 *******
@@ -45,14 +45,27 @@ pymzML is an extension to Python that offers
     * b) a very fast parser for mzML data, the standard in mass spectrometry data format and
     * c) a set of functions to compare or handle spectra.
 
-*******************************
-Availability and Implementation
-*******************************
+**************
+Implementation
+**************
 
 pymzML requires Python2.6.5+ and is fully compatible with Python3.
 The module is freely available on pymzml.github.com or pypi,
 published under LGPL and requires no additional modules to be installed.
 
+
+********
+Download
+********
+
+Get the latest version via github
+https://github.com/pymzml/pymzML
+
+************
+Installation
+************
+
+sudo python setup.py install
 
 
 ************

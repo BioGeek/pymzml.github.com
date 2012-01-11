@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Class Spectrum &mdash; pymzML v0.7.4 documentation</title>
+    <title>4. Class Spectrum &mdash; pymzML 0.7.4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pymzML v0.7.4 documentation" href="index.html" />
+    <link rel="top" title="pymzML 0.7.4 documentation" href="index.html" />
     <link rel="next" title="5. OBO parser Class" href="obo.html" />
     <link rel="prev" title="3. Module Run" href="run.html" /> 
   </head>
@@ -42,7 +45,7 @@
         <li class="right" >
           <a href="run.html" title="3. Module Run"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">pymzML v0.7.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pymzML 0.7.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -75,7 +78,7 @@ corresponding properties: <a class="reference internal" href="#spec.Spectrum.mz"
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>measuredPrecision</strong> (<em>float</em>) &#8211; in m/z, mandatory</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>measuredPrecision</strong> (<em>float</em>) &#8211; in m/z, mandatory</td>
 </tr>
 </tbody>
 </table>
@@ -83,7 +86,7 @@ corresponding properties: <a class="reference internal" href="#spec.Spectrum.mz"
 
 <dl class="attribute">
 <dt id="spec.Spectrum.xmlTree">
-<tt class="descname">xmlTree</tt><a class="headerlink" href="#spec.Spectrum.xmlTree" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">xmlTree</tt><a class="reference internal" href="_modules/spec.html#Spectrum.xmlTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.xmlTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>xmlTree property returns an iterator over the original
 xmlTree structure the spectrum was initilized with.</p>
 <p>Example:</p>
@@ -107,9 +110,9 @@ intesity tuples at same time.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of mz from the actual analysed spectrum</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of mz from the actual analysed spectrum</td>
 </tr>
 </tbody>
 </table>
@@ -128,9 +131,9 @@ at same time.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of intensity values from the actual analysed
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of intensity values from the actual analysed
 spectrum.</td>
 </tr>
 </tbody>
@@ -145,9 +148,9 @@ spectrum.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns list of tuples (m/z, intensity)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns list of tuples (m/z, intensity)</td>
 </tr>
 </tbody>
 </table>
@@ -178,9 +181,9 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns list of tuples (m/z, intensity)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns list of tuples (m/z, intensity)</td>
 </tr>
 </tbody>
 </table>
@@ -202,9 +205,9 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
 </tr>
 </tbody>
 </table>
@@ -226,9 +229,9 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
 </tr>
 </tbody>
 </table>
@@ -250,7 +253,7 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float</em>) &#8211; measured precision (e.g. 5e-6)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float</em>) &#8211; measured precision (e.g. 5e-6)</td>
 </tr>
 </tbody>
 </table>
@@ -264,7 +267,7 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>otherSpec</strong> (<em>object</em>) &#8211; Spectrum object</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>otherSpec</strong> (<em>object</em>) &#8211; Spectrum object</td>
 </tr>
 </tbody>
 </table>
@@ -287,7 +290,7 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float</em>) &#8211; Value to multiply the spectrum</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float</em>) &#8211; Value to multiply the spectrum</td>
 </tr>
 </tbody>
 </table>
@@ -295,13 +298,13 @@ peaks are already centroided, these peaks are returned.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.__truediv__">
-<tt class="descname">__truediv__</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#spec.Spectrum.__truediv__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__truediv__</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.__truediv__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.__truediv__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Divides each intensity by a float, i.e. scales the spectrum.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float, int</em>) &#8211; Value to divide the spectrum</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>float, int</em>) &#8211; Value to divide the spectrum</td>
 </tr>
 </tbody>
 </table>
@@ -309,14 +312,14 @@ peaks are already centroided, these peaks are returned.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.strip">
-<tt class="descname">strip</tt><big>(</big><em>scope='all'</em><big>)</big><a class="headerlink" href="#spec.Spectrum.strip" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">strip</tt><big>(</big><em>scope='all'</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.strip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.strip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces the size of the spectrum. Interesting if specs need to be added
 or stored.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scope</strong> (<em>string</em>) &#8211; accepts currently [&#8220;all&#8221;]</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scope</strong> (<em>string</em>) &#8211; accepts currently [&#8220;all&#8221;]</td>
 </tr>
 </tbody>
 </table>
@@ -326,17 +329,17 @@ tables as well.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.extremeValues">
-<tt class="descname">extremeValues</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#spec.Spectrum.extremeValues" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">extremeValues</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.extremeValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.extremeValues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find extreme values, minimal and maximum mz and intensity</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>string</em>) &#8211; m/z : &#8220;mz&#8221; or  intensity : &#8220;i&#8221;</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>string</em>) &#8211; m/z : &#8220;mz&#8221; or  intensity : &#8220;i&#8221;</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">tuple of minimal and maximum m/z or intensity</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple of minimal and maximum m/z or intensity</td>
 </tr>
 </tbody>
 </table>
@@ -344,7 +347,7 @@ tables as well.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.reduce">
-<tt class="descname">reduce</tt><big>(</big><em>mzRange=(None</em>, <em>None)</em><big>)</big><a class="headerlink" href="#spec.Spectrum.reduce" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reduce</tt><big>(</big><em>mzRange=(None</em>, <em>None)</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Works on peaks and reduces spectrum to a m/z range.</p>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">file_to_read</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
@@ -356,7 +359,7 @@ tables as well.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.deRef">
-<tt class="descname">deRef</tt><big>(</big><big>)</big><a class="headerlink" href="#spec.Spectrum.deRef" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">deRef</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.deRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.deRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Strip some heavy data and return deepcopy of spectrum.</p>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">file_to_read</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
@@ -368,19 +371,19 @@ tables as well.</p>
 
 <dl class="method">
 <dt id="spec.Spectrum.removeNoise">
-<tt class="descname">removeNoise</tt><big>(</big><em>mode='median'</em>, <em>noiseLevel=None</em><big>)</big><a class="headerlink" href="#spec.Spectrum.removeNoise" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">removeNoise</tt><big>(</big><em>mode='median'</em>, <em>noiseLevel=None</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.removeNoise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.removeNoise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to remove noise from peaks, centroided peaks and reprofiled
 peaks.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>string</em>) &#8211; define mode for removing noise. Default = &#8220;median&#8221;
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>string</em>) &#8211; define mode for removing noise. Default = &#8220;median&#8221;
 (other modes: &#8220;mean&#8221;, &#8220;mad&#8221;)</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns a list with tuples of m/z-intensity pairs above the
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Returns a list with tuples of m/z-intensity pairs above the
 noise threshold</td>
 </tr>
 </tbody>
@@ -400,17 +403,17 @@ noise threshold</td>
 
 <dl class="method">
 <dt id="spec.Spectrum.highestPeaks">
-<tt class="descname">highestPeaks</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#spec.Spectrum.highestPeaks" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">highestPeaks</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.highestPeaks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.highestPeaks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to retrieve the n-highest centroided peaks of the spectrum.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>int</em>) &#8211; Number of n-highest peaks</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>int</em>) &#8211; Number of n-highest peaks</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">list of centroided peaks (mz, intensity tuples)</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of centroided peaks (mz, intensity tuples)</td>
 </tr>
 </tbody>
 </table>
@@ -427,23 +430,23 @@ noise threshold</td>
 
 <dl class="method">
 <dt id="spec.Spectrum.estimatedNoiseLevel">
-<tt class="descname">estimatedNoiseLevel</tt><big>(</big><em>mode='median'</em><big>)</big><a class="headerlink" href="#spec.Spectrum.estimatedNoiseLevel" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">estimatedNoiseLevel</tt><big>(</big><em>mode='median'</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.estimatedNoiseLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.estimatedNoiseLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates noise threshold for function <a class="reference internal" href="#spec.Spectrum.removeNoise" title="spec.Spectrum.removeNoise"><tt class="xref py py-func docutils literal"><span class="pre">removeNoise()</span></tt></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="spec.Spectrum.hasOverlappingPeak">
-<tt class="descname">hasOverlappingPeak</tt><big>(</big><em>mz</em><big>)</big><a class="headerlink" href="#spec.Spectrum.hasOverlappingPeak" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">hasOverlappingPeak</tt><big>(</big><em>mz</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.hasOverlappingPeak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.hasOverlappingPeak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a spetrum has more than one peak for a given m/z value and within the measured precision</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mz</strong> (<em>float</em>) &#8211; m/z value which should be checked</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mz</strong> (<em>float</em>) &#8211; m/z value which should be checked</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns <tt class="xref docutils literal"><span class="pre">True</span></tt> if a nearby peak is detected, otherwise <tt class="xref docutils literal"><span class="pre">False</span></tt></td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns <tt class="docutils literal"><span class="pre">True</span></tt> if a nearby peak is detected, otherwise <tt class="docutils literal"><span class="pre">False</span></tt></td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
 </tbody>
 </table>
@@ -460,11 +463,11 @@ Every peak is a tuple of m/z and intensity.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mz2find</strong> (<em>float</em>) &#8211; mz value which should be found</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mz2find</strong> (<em>float</em>) &#8211; mz value which should be found</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">m/z and intensity as tuple in list</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">m/z and intensity as tuple in list</td>
 </tr>
 </tbody>
 </table>
@@ -493,11 +496,11 @@ Every peak is a tuple of m/z and intensity.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mass2find</strong> (<em>float</em>) &#8211; mass value which should be found</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mass2find</strong> (<em>float</em>) &#8211; mass value which should be found</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">mass and intensity as tuple in list if mass is found,
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">mass and intensity as tuple in list if mass is found,
 otherwise <tt class="docutils literal"><span class="pre">[]</span></tt></td>
 </tr>
 </tbody>
@@ -517,17 +520,17 @@ otherwise <tt class="docutils literal"><span class="pre">[]</span></tt></td>
 
 <dl class="method">
 <dt id="spec.Spectrum.similarityTo">
-<tt class="descname">similarityTo</tt><big>(</big><em>spec2</em><big>)</big><a class="headerlink" href="#spec.Spectrum.similarityTo" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">similarityTo</tt><big>(</big><em>spec2</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.similarityTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.similarityTo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares two spectra and returns cosine</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spec2</strong> (<em>pymzml.spec.Spectrum</em>) &#8211; another pymzml spectrum that is compated to the current spectrum.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spec2</strong> (<em>pymzml.spec.Spectrum</em>) &#8211; another pymzml spectrum that is compated to the current spectrum.</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">value between 0 and 1, i.e. the cosine between the two spectra.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">value between 0 and 1, i.e. the cosine between the two spectra.</td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
 </tr>
 </tbody>
 </table>
@@ -542,13 +545,13 @@ The more similar the specs are, the closer the value is to 1.</p>
 
 <dl class="attribute">
 <dt id="spec.Spectrum.tmzSet">
-<tt class="descname">tmzSet</tt><a class="headerlink" href="#spec.Spectrum.tmzSet" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">tmzSet</tt><a class="reference internal" href="_modules/spec.html#Spectrum.tmzSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.tmzSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a set out of transformed m/z values (including all values in the defined imprecision).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">set</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">set</td>
 </tr>
 </tbody>
 </table>
@@ -556,13 +559,13 @@ The more similar the specs are, the closer the value is to 1.</p>
 
 <dl class="attribute">
 <dt id="spec.Spectrum.tmassSet">
-<tt class="descname">tmassSet</tt><a class="headerlink" href="#spec.Spectrum.tmassSet" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">tmassSet</tt><a class="reference internal" href="_modules/spec.html#Spectrum.tmassSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.tmassSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a set out of transformed mass values (including all values in the defined imprecision).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">set</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">set</td>
 </tr>
 </tbody>
 </table>
@@ -576,9 +579,9 @@ The more similar the specs are, the closer the value is to 1.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of peaks (tuples of mz and intensity). Float m/z
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of peaks (tuples of mz and intensity). Float m/z
 values are adjusted by the internal precision to integers.</td>
 </tr>
 </tbody>
@@ -593,9 +596,9 @@ values are adjusted by the internal precision to integers.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of peaks (tuples of mz and intensity). Float m/z
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a list of peaks (tuples of mz and intensity). Float m/z
 values are adjusted by the internal precision to integers.</td>
 </tr>
 </tbody>
@@ -604,7 +607,7 @@ values are adjusted by the internal precision to integers.</td>
 
 <dl class="method">
 <dt id="spec.Spectrum.deconvolute_peaks">
-<tt class="descname">deconvolute_peaks</tt><big>(</big><em>ppmFactor=4</em>, <em>minCharge=1</em>, <em>maxCharge=8</em>, <em>maxNextPeaks=100</em><big>)</big><a class="headerlink" href="#spec.Spectrum.deconvolute_peaks" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">deconvolute_peaks</tt><big>(</big><em>ppmFactor=4</em>, <em>minCharge=1</em>, <em>maxCharge=8</em>, <em>maxNextPeaks=100</em><big>)</big><a class="reference internal" href="_modules/spec.html#Spectrum.deconvolute_peaks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.deconvolute_peaks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculating uncharged masses and returning deconvoluted peaks.</p>
 <p>The deconvolution of spectra is done by first identifying isotope envelopes and
 the charge state of this envelopes. The first peak of an isotope envelope is choosen
@@ -634,7 +637,7 @@ peaks.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ppmFactor</strong> (<em>int</em>) &#8211; ppm factor (imprecision factor)</li>
 <li><strong>minCharge</strong> (<em>int</em>) &#8211; minimum charge considered</li>
 <li><strong>maxCharge</strong> (<em>int</em>) &#8211; maximum charge considered</li>
@@ -642,10 +645,10 @@ peaks.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">tuple (mass, intensity)</p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">tuple (mass, intensity)</p>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Deconvoluted peaks, mass (instead of m/z) and intensity are
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Deconvoluted peaks, mass (instead of m/z) and intensity are
 returned</p>
 </td>
 </tr>
@@ -663,9 +666,9 @@ peaks.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field"><th class="field-name">Returns:</th><td class="field-body">list of deconvoluted peaks (mass (instead of m/z) / intensity tuples)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of deconvoluted peaks (mass (instead of m/z) / intensity tuples)</td>
 </tr>
 </tbody>
 </table>
@@ -695,7 +698,7 @@ peaks.</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -724,12 +727,12 @@ peaks.</p>
         <li class="right" >
           <a href="run.html" title="3. Module Run"
              >previous</a> |</li>
-        <li><a href="index.html">pymzML v0.7.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">pymzML 0.7.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
 </html>
