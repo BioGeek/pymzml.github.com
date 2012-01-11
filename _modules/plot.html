@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>plot &mdash; pymzML v0.7.4 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="pymzML v0.7.4 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pymzML v0.7.4 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for plot</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python3.2</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># encoding: utf-8</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Plotting functions for pymzml</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">pymzml</span>
+
+<span class="sd">Copyright (C) 2010-2011 T. Bald, J. Barth, M. Specht, C. Fufezan </span>
+
+<span class="sd">    This program is free software: you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by</span>
+<span class="sd">    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+
+<span class="sd">    This program is distributed in the hope that it will be useful,</span>
+<span class="sd">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">    GNU General Public License for more details.</span>
+
+<span class="sd">    You should have received a copy of the GNU General Public License</span>
+<span class="sd">    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">math</span> 
+
+<span class="kn">import</span> <span class="nn">collections</span>
+
+
+<div class="viewcode-block" id="Factory"><a class="viewcode-back" href="../plot.html#plot.Factory">[docs]</a><span class="k">class</span> <span class="nc">Factory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to plot spectra usign pamzml. Graphs are written in xhtml file. Genral</span>
+<span class="sd">    graph/picture file format is .svg.</span>
+<span class="sd">    </span>
+<span class="sd">    :param filename: Name for the output file. Default = &quot;spectra.xhtml&quot;</span>
+<span class="sd">    :type filename: string</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; import pymzml, get_example_file</span>
+<span class="sd">    &gt;&gt;&gt; mzMLFile = &#39;profile-mass-spectrum.mzml&#39;</span>
+<span class="sd">    &gt;&gt;&gt; example_file = get_example_file.open_example(mzMLFile)</span>
+<span class="sd">    &gt;&gt;&gt; run = pymzml.run.Run(&quot;../mzML_example_files/&quot;+mzMLFile, precisionMSn = 250e-6)</span>
+<span class="sd">    &gt;&gt;&gt; p = pymzml.plot.Factory()</span>
+<span class="sd">    &gt;&gt;&gt; for spec in run:</span>
+<span class="sd">    &gt;&gt;&gt;     p.newPlot()</span>
+<span class="sd">    &gt;&gt;&gt;     p.add(spec.peaks, color=(200,00,00), style=&#39;circles&#39;)</span>
+<span class="sd">    &gt;&gt;&gt;     p.add(spec.centroidedPeaks, color=(00,00,00), style=&#39;sticks&#39;)</span>
+<span class="sd">    &gt;&gt;&gt;     p.add(spec.reprofiledPeaks, color=(00,255,00), style=&#39;circles&#39;)</span>
+<span class="sd">    &gt;&gt;&gt;     p.save( filename=&quot;output/plotAspect.xhtml&quot; , mzRange = [745.2,745.6] )</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filename</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;spectra.xhtml&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span>  <span class="p">]</span>     <span class="c"># list of plots, where each plot hold a list of mz-i lists that should be plotted in the same plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">styles</span> <span class="o">=</span> <span class="p">[</span>  <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>  <span class="p">]</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="Factory.newPlot"><a class="viewcode-back" href="../plot.html#plot.Factory.newPlot">[docs]</a>    <span class="k">def</span> <span class="nf">newPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize new plot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">[]</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">styles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">[]</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">[]</span> <span class="p">)</span>
+        <span class="k">return</span>
+    </div>
+<div class="viewcode-block" id="Factory.add"><a class="viewcode-back" href="../plot.html#plot.Factory.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mo">00</span><span class="p">,</span><span class="mo">00</span><span class="p">,</span><span class="mo">00</span><span class="p">)</span> <span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;circles&#39;</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add data to the graph.</span>
+<span class="sd">        </span>
+<span class="sd">        :param data: The data added to the graph</span>
+<span class="sd">        :type data:</span>
+<span class="sd">        :param color: color encoded in RGB. Default = (00,00,00)</span>
+<span class="sd">        :type color: tuple (R,G,B)</span>
+<span class="sd">        :param style: Define the style of th output. Default = &quot;circles&quot;</span>
+<span class="sd">        :type style: string</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">newPlot</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">styles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="c">#print(&quot;Added {0} data points&quot;.format(len(self.plots[-1][-1])))</span>
+        <span class="k">return</span>
+        </div>
+<div class="viewcode-block" id="Factory.info"><a class="viewcode-back" href="../plot.html#plot.Factory.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns info about the current processed plots</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Factory holds {0} unique plots&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;                Plot {0} holds {1} unique datasets&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">plot</span><span class="p">)))</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">dataset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;                  Dataset {0} holds {1} datapoints&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
+                
+        <span class="k">print</span><span class="p">()</span>
+        <span class="k">return</span>
+        </div>
+<div class="viewcode-block" id="Factory.save"><a class="viewcode-back" href="../plot.html#plot.Factory.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">mzRange</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the actual processed plots</span>
+<span class="sd">        </span>
+<span class="sd">        :param filename: Name for the output file. Default = &quot;spectra.xhtml&quot;</span>
+<span class="sd">        :type filename: string</span>
+<span class="sd">        :param mzRange: m/z range which should be considered [start, end]. Default = [``None``,``None``]</span>
+<span class="sd">        :type mzRange: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>
+            
+        <span class="n">io</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="s">&#39;w&#39;</span> <span class="p">)</span>
+        <span class="c"># NOTE: we need to check if file exists and/or if file can be written ...</span>
+        
+        <span class="c">#not requiring matplot lib but not as cool ....</span>
+        <span class="c"># we can include a check if matplot lib installed and add this as another fileformat </span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;</span>
+<span class="s">        &lt;head&gt;</span>
+<span class="s">        &lt;title&gt;pymzml spectrum visualisation&lt;/title&gt;</span>
+<span class="s">        &lt;style&gt;</span>
+<span class="s">        &lt;/style&gt;</span>
+<span class="s">        &lt;/head&gt;</span>
+<span class="s">        &lt;body style=&quot;position:absolute; z-index:0; left:5%; top:5%; width:90%; height:90%;&quot;&gt;</span>
+<span class="s">        </span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">io</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">plotNumber</span><span class="p">,</span><span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">plots</span><span class="p">):</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="mi">1000</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="mi">700</span>
+            <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mz</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mz</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span> <span class="n">i</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">plot</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">dataset</span> <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mz</span> <span class="o">&lt;=</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">])</span><span class="o">*</span><span class="mf">1.05</span>
+                <span class="n">i_min</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;Plot {0} contains no data, skipping  ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">plotNumber</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">            &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;</span>
+<span class="s">            width=&quot;{w}&quot; height=&quot;{h}&quot;</span>
+<span class="s">            style=&quot;width:100%; height:100%; position:relative; top:0; left:0; z-index:-1;&quot;&gt;</span>
+<span class="s">            &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">),</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">io</span><span class="p">)</span>
+            <span class="n">PADDING</span> <span class="o">=</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span> <span class="c"># css style convention</span>
+            <span class="n">baseline</span> <span class="o">=</span> <span class="n">h</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            
+            <span class="c"># Drawing Frame ...</span>
+            <span class="k">for</span> <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="ow">in</span> <span class="p">[</span>    <span class="p">(</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">w</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                                    <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">w</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">h</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                                    <span class="p">(</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">h</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">w</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">h</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                                    <span class="p">(</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">h</span><span class="o">-</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+            <span class="p">]:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;line x1=&quot;{0}&quot; y1=&quot;{1}&quot; x2=&quot;{2}&quot; y2=&quot;{3}&quot;</span>
+<span class="s">                style=&quot;stroke:rgb(00,00,00);stroke-width:1&quot;/&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">io</span><span class="p">)</span>
+            
+            <span class="n">pixelpermz</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="n">w</span> <span class="o">-</span> <span class="n">PADDING</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+            <span class="n">pixelper_i</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span> <span class="n">h</span> <span class="o">-</span> <span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">PADDING</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">i_max</span><span class="o">-</span><span class="n">i_min</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">sep</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="n">sep</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="c"># grid</span>
+            
+            <span class="c"># Drawing ticks and x lables</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">factor</span><span class="p">)),</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">factor</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span> <span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="o">+</span>   <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span> <span class="o">-</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="o">*</span> <span class="n">pixelpermz</span>   <span class="p">))</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">baseline</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="mi">77</span> <span class="c">#if _ % 10 == 0 else 125 </span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;line x1=&quot;{0}&quot; y1=&quot;{1}&quot; x2=&quot;{0}&quot; y2=&quot;{2}&quot;</span>
+<span class="s">                style=&quot;stroke-dasharray: 9, 5;stroke:rgb({3},{3},{3});stroke-width:0.5&quot;/&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">baseline</span><span class="p">,</span><span class="n">color</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">io</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;line x1=&quot;{0}&quot; y1=&quot;{1}&quot; x2=&quot;{0}&quot; y2=&quot;{2}&quot; </span>
+<span class="s">                style=&quot;stroke:rgb(00,00,00);stroke-width:0.5;&quot;/&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">baseline</span><span class="p">,</span><span class="n">baseline</span><span class="o">+</span><span class="mi">10</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">io</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;text x=&quot;{x}&quot; y=&quot;{y}&quot; transform=&quot;rotate(30 {x},{y})&quot; font-family=&quot;Courier&quot; text-anchor=&quot;start&quot; font-size=&quot;{fontsize}&quot; fill=&quot;black&quot; &gt;{0:7.3f}&lt;/text&gt;</span>
+<span class="s">                    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">30</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">18</span><span class="p">),</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">io</span><span class="p">)</span>
+            
+            <span class="c"># Drawing data points</span>
+            <span class="k">for</span> <span class="n">datasetnumber</span><span class="p">,</span><span class="n">dataset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">pos</span><span class="p">,(</span><span class="n">mz</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mz</span> <span class="o">&lt;=</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">PADDING</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="o">+</span>   <span class="p">(</span><span class="n">mz</span> <span class="o">-</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="o">*</span> <span class="n">pixelpermz</span>   <span class="p">))</span>
+                        <span class="n">y</span> <span class="o">=</span> <span class="n">baseline</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">pixelper_i</span><span class="p">)</span>
+                        <span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="n">plotNumber</span><span class="p">][</span><span class="n">datasetnumber</span><span class="p">]</span>
+                        <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">styles</span><span class="p">[</span><span class="n">plotNumber</span><span class="p">][</span><span class="n">datasetnumber</span><span class="p">]</span>
+                    
+                        <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="s">&#39;circles&#39;</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;circle cx=&quot;{x}&quot; cy=&quot;{y}&quot; r=&quot;3&quot; style=&quot;fill:rgb({r},{g},{b});&quot; /&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">io</span><span class="p">)</span>
+                    
+                        <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="s">&#39;sticks&#39;</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;line x1=&quot;{0}&quot; y1=&quot;{1}&quot; x2=&quot;{0}&quot; y2=&quot;{2}&quot;</span>
+<span class="s">                            style=&quot;stroke:rgb({r},{g},{b});stroke-width:1&quot;/&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">baseline</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">=</span><span class="n">g</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">io</span><span class="p">)</span>
+                    
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Style {0} not support yet ...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">style</span><span class="p">),</span><span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                            <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                        
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&lt;/svg&gt;&quot;</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">io</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        &lt;/body&gt;</span>
+<span class="s">        &lt;/html&gt;</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">io</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">pymzML v0.7.4 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
