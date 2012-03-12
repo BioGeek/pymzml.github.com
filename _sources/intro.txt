@@ -73,6 +73,19 @@ The complete Documentation can be found as pdf
     | http://pymzml.github.com/dist/pymzml.pdf
 
 
+********
+Citation
+********
+
+Please cite us when using pymzML in your work.
+
+Bald, T., Barth, J., Niehues, A., Specht, M., Hippler, M., and Fufezan, C. (2012) pymzML - Python module for high throughput bioinformatics on mass spectrometry data, Bioinformatics, doi: 10.1093/bioinformatics/bts066
+
+The original publication can be found here:
+    | http://bioinformatics.oxfordjournals.org/content/early/2012/02/02/bioinformatics.bts066.abstract
+    | http://bioinformatics.oxfordjournals.org/content/early/2012/02/02/bioinformatics.bts066.full.pdf
+
+
 ************
 Installation
 ************
