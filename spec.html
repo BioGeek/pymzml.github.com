@@ -143,14 +143,14 @@ spectrum.</td>
 <dl class="attribute">
 <dt id="spec.Spectrum.peaks">
 <tt class="descname">peaks</tt><a class="reference internal" href="_modules/spec.html#Spectrum.peaks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spec.Spectrum.peaks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of peaks of the spectrum as tuples (m/z, intensity).</p>
+<dd><p>Returns a list of peaks of the spectrum as two lists, i.e. list of m/z and list of intensity values.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Two lists</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns list of tuples (m/z, intensity)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a list with m/z values and a list with intensities</td>
 </tr>
 </tbody>
 </table>
@@ -158,8 +158,9 @@ spectrum.</td>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymzml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">spectra</span><span class="o">.</span><span class="n">mzMl</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">spectrum</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">peaks</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">mzList</span><span class="p">,</span> <span class="n">intensityList</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">peaks</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mzList</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">intensityList</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -191,8 +192,9 @@ peaks are already centroided, these peaks are returned.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymzml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">spectra</span><span class="o">.</span><span class="n">mzMl</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">spectrum</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">mzList</span><span class="p">,</span> <span class="n">intensityList</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">centroidedPeaks</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mzList</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">intensityList</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -205,9 +207,9 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i lists</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as two lists of mz and intensity values</td>
 </tr>
 </tbody>
 </table>
@@ -215,7 +217,8 @@ peaks are already centroided, these peaks are returned.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymzml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">spectra</span><span class="o">.</span><span class="n">mzMl</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">spectrum</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
 <span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -229,9 +232,9 @@ peaks are already centroided, these peaks are returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i tuples</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of reprofiled mz,i lists</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as tuple list</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Reprofiled peaks as two lists of mz and intensity values</td>
 </tr>
 </tbody>
 </table>
@@ -239,7 +242,8 @@ peaks are already centroided, these peaks are returned.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymzml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">spectra</span><span class="o">.</span><span class="n">mzMl</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">spectrum</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">reprofiledPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
 <span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -395,7 +399,9 @@ noise threshold</td>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymzml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">run</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">spectra</span><span class="o">.</span><span class="n">mzML</span><span class="o">.</span><span class="n">gz</span><span class="p">,</span> <span class="n">MS1_Precision</span> <span class="o">=</span> <span class="mf">5e-6</span><span class="p">,</span> <span class="n">MSn_Precision</span> <span class="o">=</span> <span class="mf">20e-6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">spectrum</span> <span class="ow">in</span> <span class="n">run</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">removeNoise</span><span class="p">(</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;mean&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">spectrum</span><span class="o">.</span><span class="n">removeNoise</span><span class="p">(</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;mean&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>  
+<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">spectrum</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>     
 <span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -413,7 +419,7 @@ noise threshold</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of centroided peaks (mz, intensity tuples)</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of centroided peaks (mz, intensity lists)</td>
 </tr>
 </tbody>
 </table>
@@ -732,7 +738,7 @@ peaks.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

@@ -161,14 +161,14 @@
     <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">otherSpec</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Subtracts two pymzml spectra.</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param otherSpec: Spectrum object</span>
 <span class="sd">        :type otherSpec: object</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">otherSpec</span><span class="p">,</span><span class="n">Spectrum</span><span class="p">)</span> <span class="p">,</span> <span class="s">&quot;can only subtract two pymzML spectra ...&quot;</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deRef</span><span class="p">()</span>
-        
+
         <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofile_Peaks</span><span class="p">()</span>
 
@@ -195,12 +195,15 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> <span class="s">&quot;require float or int of intensity values ...&quot;</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deRef</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">tmp</span><span class="o">.</span><span class="n">peaks</span>  <span class="o">=</span> <span class="p">[(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">peaks</span><span class="p">]</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">peaks</span>  <span class="o">=</span> <span class="p">[</span> <span class="n">mz</span> <span class="k">for</span> <span class="n">mz</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span> <span class="n">i</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+            <span class="c">#]  [(mz, i * float(value)) for mz, i in tmp.peaks]</span>
         <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_centroidedPeaks</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">tmp</span><span class="o">.</span><span class="n">centroidedPeaks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">))</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">]</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">centroidedPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mz</span> <span class="k">for</span> <span class="n">mz</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span> <span class="n">i</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+
         <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">mz</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span><span class="p">[</span><span class="n">mz</span><span class="p">]</span> <span class="o">*=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mz</span> <span class="k">for</span> <span class="n">mz</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span> <span class="n">i</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+            <span class="c"># for mz in tmp._reprofiledPeaks.keys():</span>
+            <span class="c">#     tmp._reprofiledPeaks[mz] *= float(value)</span>
         <span class="k">return</span> <span class="n">tmp</span>
 </div>
 <div class="viewcode-block" id="Spectrum.__truediv__"><a class="viewcode-back" href="../spec.html#spec.Spectrum.__truediv__">[docs]</a>    <span class="k">def</span> <span class="nf">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
@@ -270,7 +273,9 @@
 <span class="sd">        &quot;all&quot; will remove the raw and profiled data and some internal lookup</span>
 <span class="sd">        tables as well.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">scope</span> <span class="o">==</span> <span class="s">&#39;all&#39;</span><span class="p">:</span>
+            
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="c"># decode, just in case ...</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span>
@@ -283,6 +288,7 @@
             <span class="k">if</span> <span class="s">&#39;encodedData&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="k">del</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;encodedData&#39;</span><span class="p">]</span>
                 <span class="k">del</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;PY:0000000&#39;</span><span class="p">]</span> <span class="c"># this is the ID tag corresponding to &#39;encodedData&#39;</span>
+            
         <span class="k">else</span><span class="p">:</span>
             <span class="k">print</span><span class="p">(</span><span class="s">&quot;Dont understand strip request &quot;</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 
@@ -343,9 +349,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s">&#39;mz&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span><span class="p">[</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">min</span><span class="p">([</span><span class="n">mz</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">])</span> <span class="p">,</span> <span class="nb">max</span><span class="p">([</span><span class="n">mz</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">])</span> <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span><span class="p">[</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span> <span class="nb">min</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">])</span> <span class="p">,</span> <span class="nb">max</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">])</span> <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="c"># emtpy spectrum</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_extremeValues</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
@@ -375,53 +381,65 @@
         <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">intensityList</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">([]),</span> <span class="s">&quot;require list of intensity values ...&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="n">intensityList</span>
         <span class="k">return</span>
-</div>
+
+
+    <span class="c"># ndeklein 27/04/2012: changed peaks to return the m/z and intensity list seperatly instead of returning them as zipped tuples</span></div>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the list of peaks of the spectrum as tuples (m/z, intensity).</span>
+<span class="sd">        Returns a list of peaks of the spectrum as two lists, i.e. list of m/z and list of intensity values.</span>
 
-<span class="sd">        :rtype: list of tuples</span>
-<span class="sd">        :return: Returns list of tuples (m/z, intensity)</span>
+<span class="sd">        :rtype: Two lists</span>
+<span class="sd">        :return: Returns a list with m/z values and a list with intensities</span>
 
 <span class="sd">        Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; import pymzml</span>
 <span class="sd">        &gt;&gt;&gt; run = pymzml.run.Reader(spectra.mzMl.gz, MS1_Precision = 5e-6, MSn_Precision = 20e-6)</span>
 <span class="sd">        &gt;&gt;&gt; for spectrum in run:</span>
-<span class="sd">        ...     for mz, i in spectrum.peaks:</span>
-<span class="sd">        ...         print(mz, i)</span>
-
+<span class="sd">        ...     mzList, intensityList = spectrum.peaks</span>
+<span class="sd">        ...     for index, mz in enumerate(mzList):</span>
+<span class="sd">        ...         print(mz, intensityList[index])</span>
+<span class="sd">        </span>
 <span class="sd">        .. note::</span>
 
 <span class="sd">           The peaks property can also be setted, e.g. for theoretical data.</span>
 <span class="sd">           It requires a list of mz/intensity tuples.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s">&#39;reprofiled&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s">&#39;reprofiled&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> 
             <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroid_peaks</span><span class="p">()</span>
+         
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mz</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">and</span> <span class="s">&#39;encodedData&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mz</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">))</span>
+                <span class="c"># ndeklein 27/04/2012: Return self.mz, self.i instead of list(zip(self.mz , self.i)) because zipping large tuples takes a long time</span>
+                <span class="c">#                      For a function where I had to call spec.peaks 32000 times this got the runtime down from roughly 90000 to roughly 300 seconds.</span>
+                <span class="c">#                      Because 2 lists are returned instead of a zipped tuple, the syntax to loop through them changes a bit. Instead of</span>
+                <span class="c">#                      for spectrum in run: for mz, i in inspectrum.peaks: print(mz, i) you can do</span>
+                <span class="c">#                      for spectrum in run: mzList, iList = spectrum.peaks \n for index, mz in enumerate(mzList): print(mz, iList[index])                 </span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
+                <span class="c"># return self.mz, self.i</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the list of peaks of the chromatogram as tuples (time, intensity).</span>
+<span class="sd">        Returns the list of peaks of the chromatogram as two lists (time list &amp; intensity list).</span>
 
-<span class="sd">        :rtype: list of tuples</span>
-<span class="sd">        :return: Returns list of tuples (time, intensity)</span>
+<span class="sd">        :rtype: list of two lists (time &amp; intensity list)</span>
+<span class="sd">        :return: Returns list of lists (time &amp; intensity list)</span>
 
 <span class="sd">        Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; import pymzml</span>
 <span class="sd">        &gt;&gt;&gt; run = pymzml.run.Reader(spectra.mzMl.gz, MS1_Precision = 5e-6, MSn_Precision = 20e-6)</span>
 <span class="sd">        &gt;&gt;&gt; for spectrum in run:</span>
-<span class="sd">        ...     for time, i in spectrum.profile:</span>
-<span class="sd">        ...         print(time, i)</span>
+<span class="sd">        ...     for pos, time in enumerate(spectrum.profile):</span>
+<span class="sd">        ...         print( time, spectrum.profile[1][pos] )</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s">&#39;reprofiled&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroid_peaks</span><span class="p">()</span>
@@ -429,19 +447,22 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mz</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">and</span> <span class="s">&#39;encodedData&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mz</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">mz</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span>
 
 
     <span class="nd">@peaks.setter</span>
-<div class="viewcode-block" id="Spectrum.peaks"><a class="viewcode-back" href="../spec.html#spec.Spectrum.peaks">[docs]</a>    <span class="k">def</span> <span class="nf">peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mz_i_tuple_list</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">mz_i_tuple_list</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">([]),</span> <span class="s">&quot;require list of tuples (mz,intensity) ...&quot;</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mz_i_tuple_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<div class="viewcode-block" id="Spectrum.peaks"><a class="viewcode-back" href="../spec.html#spec.Spectrum.peaks">[docs]</a>    <span class="k">def</span> <span class="nf">peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mz_i_list</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">mz_i_list</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">([]),</span> <span class="s">&quot;require list of mz list and intensity list ...&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mz_i_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_mz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_i</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">mz_i_tuple_list</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="n">mz_i_tuple_list</span>
+        <span class="c"># self._mz, self._i = map(list,zip(*mz_i_tuple_list))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mz</span> <span class="o">=</span> <span class="n">mz_i_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_i</span>  <span class="o">=</span> <span class="n">mz_i_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">=</span> <span class="n">mz_i_list</span>
         <span class="k">return</span> <span class="bp">self</span>
-</div>
+
+    <span class="c"># ndeklein 27/04/2012: changed centroidedPeaks to return the m/z and intensity list seperatly so that the return value is consistent with the changed peaks() return value</span></div>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">centroidedPeaks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -459,8 +480,9 @@
 <span class="sd">        &gt;&gt;&gt; import pymzml</span>
 <span class="sd">        &gt;&gt;&gt; run = pymzml.run.Reader(spectra.mzMl.gz, MS1_Precision = 5e-6, MSn_Precision = 20e-6)</span>
 <span class="sd">        &gt;&gt;&gt; for spectrum in run:</span>
-<span class="sd">        ...     for mz, i in spectrum.centroidedPeaks:</span>
-<span class="sd">        ...         print(mz, i)</span>
+<span class="sd">        ...     mzList, intensityList = spectrum.centroidedPeaks</span>
+<span class="sd">        ...     for index, mz in enumerate(mzList):</span>
+<span class="sd">        ...         print(mz, intensityList[index])</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s">&#39;reprofiled&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -469,14 +491,23 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span> <span class="c">#or self._reprofiledPeaks != None:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroid_peaks</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span>
+        <span class="c"># ndeklein 27/04/2012: self._centroid_peaks() now returns two values, a list of m/z values and a list of intensities. Because it is saved in one variable</span>
+        <span class="c">#                      in the line &#39;self._centroidedPeaks = self._centroid_peaks()&#39; above, self._centroidedPeaks is now a tuple with as first value the</span>
+        <span class="c">#                      m/z list and second value the intensity list. To return them in the same way peaks() returns, reutrn self._centroidedPeaks[0] (the m/z list)</span>
+        <span class="c">#                      and self._centroidedPeaks[1] (the intensityList).</span>
+        <span class="c">#                      Because 2 lists are returned instead of a zipped tuple, the syntax to loop through them changes a bit. Instead of</span>
+        <span class="c">#                      for spectrum in run: for mz, i in inspectrum.centroidedPeaks: print(mz, i) you can do</span>
+        <span class="c">#                      for spectrum in run: mzList, iList = spectrum.centroidedPeaks \n for index, mz in enumerate(mzList): print(mz, iList[index]) </span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@centroidedPeaks.setter</span>
 <div class="viewcode-block" id="Spectrum.centroidedPeaks"><a class="viewcode-back" href="../spec.html#spec.Spectrum.centroidedPeaks">[docs]</a>    <span class="k">def</span> <span class="nf">centroidedPeaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mz_i_tuple_list</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">mz_i_tuple_list</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">([]),</span> <span class="s">&quot;require list of tuples (mz,intensity) ...&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span> <span class="o">=</span> <span class="n">mz_i_tuple_list</span>
         <span class="k">return</span>
-</div>
+
+
+    <span class="c"># ndeklein 27/04/2012: changed _centroid_peaks to return the m/z and intensity list seperatly so that the return value is consistent with the changed peaks() return value</span></div>
     <span class="k">def</span> <span class="nf">_centroid_peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform a Gauss fit to centroid the peaks for the property</span>
@@ -492,6 +523,10 @@
                 <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
                 <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">isProfile</span><span class="p">:</span>
+            <span class="c"># ndeklein: need two separate lists, one for mz and one for intensity</span>
+            <span class="n">mzList</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">intensityList</span> <span class="o">=</span> <span class="p">[]</span>
+                
             <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="s">&#39;reprofiled&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">intensity_array</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reprofiledPeaks</span> <span class="p">]</span>
@@ -513,7 +548,7 @@
                     <span class="n">y2</span>  <span class="o">=</span> <span class="n">intensity_array</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
                     <span class="n">x3</span>  <span class="o">=</span> <span class="n">mz_array</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">y3</span>  <span class="o">=</span> <span class="n">intensity_array</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-                    
+
                     <span class="k">if</span> <span class="n">x2</span><span class="o">-</span><span class="n">x1</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">x3</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span> <span class="o">&lt;</span> <span class="n">x3</span><span class="o">-</span><span class="n">x2</span><span class="p">:</span>
                         <span class="c"># no gauss fit if distance between mz values is too large</span>
                         <span class="k">continue</span>
@@ -529,7 +564,7 @@
                         <span class="n">mue</span> <span class="o">=</span> <span class="p">(</span><span class="n">doubleLog</span><span class="o">*</span><span class="p">(</span> <span class="n">x1</span><span class="o">*</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x3</span><span class="o">*</span><span class="n">x3</span> <span class="p">)</span> <span class="o">-</span> <span class="n">x1</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="o">*</span><span class="n">x2</span> <span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">doubleLog</span><span class="o">*</span><span class="p">(</span><span class="n">x3</span><span class="o">-</span><span class="n">x1</span><span class="p">))</span>
                         <span class="n">cSquarred</span> <span class="o">=</span> <span class="p">(</span> <span class="n">x2</span><span class="o">*</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="o">*</span><span class="n">x1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x2</span><span class="o">*</span><span class="n">mue</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span><span class="o">*</span><span class="n">mue</span> <span class="p">)</span><span class="o">/</span> <span class="p">(</span> <span class="mi">2</span><span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y1</span><span class="o">/</span><span class="n">y2</span> <span class="p">))</span>
                         <span class="n">A</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">mue</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">mue</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="n">cSquarred</span><span class="p">)</span> <span class="p">)</span>
-                        
+
                         <span class="c">#if A &gt; 1e20:</span>
                             <span class="c">#print(mue, A, doubleLog, cSquarred)</span>
                             <span class="c">#print(x1, &quot;\t&quot;, y1)</span>
@@ -538,10 +573,16 @@
                             <span class="c">#print()</span>
                     <span class="k">except</span><span class="p">:</span>
                         <span class="k">continue</span>
-                    <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mue</span><span class="p">,</span><span class="n">A</span><span class="p">))</span>
+                    
+                    <span class="c"># ndeklein: instead of adding a tuple to tmp, add the values to separate lists</span>
+                    <span class="n">mzList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mue</span><span class="p">)</span>
+                    <span class="n">intensityList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+                    
+
             <span class="c">#for mue, A in tmp:</span>
                 <span class="c">#print(mue, &quot;\t&quot;, A)</span>
-            <span class="k">return</span> <span class="n">tmp</span>
+            <span class="c"># ndeklein: return a list of mz values and a list of intensity values instead of a list of tuples</span>
+            <span class="k">return</span> <span class="n">mzList</span><span class="p">,</span> <span class="n">intensityList</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span>
 
@@ -571,7 +612,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tmzSet</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_tmzSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">mz</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_tmzSet</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">(</span>
                                     <span class="nb">range</span><span class="p">(</span>
                                             <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">mz</span> <span class="o">-</span> <span class="p">(</span><span class="n">mz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">measuredPrecision</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">internalPrecision</span><span class="p">)),</span>
@@ -591,7 +632,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_tmassSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transformed_mass_with_error</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tmassSet</span>
 </div>
-<div class="viewcode-block" id="Spectrum.deRef"><a class="viewcode-back" href="../spec.html#spec.Spectrum.deRef">[docs]</a>    <span class="k">def</span> <span class="nf">deRef</span><span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+<div class="viewcode-block" id="Spectrum.deRef"><a class="viewcode-back" href="../spec.html#spec.Spectrum.deRef">[docs]</a>    <span class="k">def</span> <span class="nf">deRef</span><span class="p">(</span> <span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Strip some heavy data and return deepcopy of spectrum.</span>
 
@@ -619,7 +660,13 @@
         <span class="c">#NOTE Total ion current should be adjusted as well, I guess ;)</span>
         <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">mzRange</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(()),</span> <span class="s">&quot;require tuple of (min,max) mz range to reduce spectrum&quot;</span>
         <span class="k">if</span> <span class="n">mzRange</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
-            <span class="n">tmp_peaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span> <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mz</span> <span class="o">&lt;=</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
+            <span class="n">tmp_peaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[],</span> <span class="p">[]</span> <span class="p">]</span>
+            <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">):</span>
+                <span class="k">if</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mz</span> <span class="o">&lt;=</span> <span class="n">mzRange</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
+                    <span class="n">tmp_peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">mz</span> <span class="p">)</span>
+                    <span class="n">tmp_peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">i</span>  <span class="p">)</span>
+            <span class="c"># [ (mz,i) for mz, i in self.peaks if mzRange[0] &lt;= mz &lt;= mzRange[1] ]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">scope</span> <span class="o">=</span> <span class="s">&#39;not_all&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span> <span class="o">=</span> <span class="n">tmp_peaks</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -646,7 +693,9 @@
 <span class="sd">        &gt;&gt;&gt; import pymzml</span>
 <span class="sd">        &gt;&gt;&gt; run = pymzml.run.Reader(spectra.mzML.gz, MS1_Precision = 5e-6, MSn_Precision = 20e-6)</span>
 <span class="sd">        &gt;&gt;&gt; for spectrum in run:</span>
-<span class="sd">        ...     for mz, i in spectrum.removeNoise( mode = &#39;mean&#39;):</span>
+<span class="sd">        ...     spectrum.removeNoise( mode = &#39;mean&#39;):</span>
+<span class="sd">        ...     for pos, mz in enumerate( spectrum.centroidedPeaks[0] )  </span>
+<span class="sd">        ...         i = spectrum.centroidedPeaks[1][ pos ]     </span>
 <span class="sd">        ...         print(mz, i)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -654,10 +703,21 @@
             <span class="n">noiseLevel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimatedNoiseLevel</span><span class="p">(</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peaks</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span>  <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span>  <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">noiseLevel</span><span class="p">]</span>
+            <span class="n">tmpPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[],</span> <span class="p">[]</span> <span class="p">]</span>
+            <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">intensity</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">intensity</span> <span class="o">&gt;=</span> <span class="n">noiseLevel</span><span class="p">:</span>
+                    <span class="n">tmpPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span> <span class="n">pos</span> <span class="p">])</span>
+                    <span class="n">tmpPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">])</span> <span class="c"># could use intensity directly ...</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span>  <span class="o">=</span> <span class="n">tmpPeaks</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaks</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span>  <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">noiseLevel</span><span class="p">]</span>
+            <span class="n">tmpCentroidedPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[],</span> <span class="p">[]</span> <span class="p">]</span>
+            <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">intensity</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">intensity</span> <span class="o">&gt;=</span> <span class="n">noiseLevel</span><span class="p">:</span>
+                    <span class="n">tmpCentroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span> <span class="n">pos</span> <span class="p">])</span>
+                    <span class="n">tmpCentroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">])</span> <span class="c"># could use intensity directly ...</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span> <span class="o">=</span> <span class="n">tmpCentroidedPeaks</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -669,7 +729,7 @@
 <span class="sd">        :param n: Number of n-highest peaks</span>
 <span class="sd">        :type n: int</span>
 <span class="sd">        :rtype: list</span>
-<span class="sd">        :return: list of centroided peaks (mz, intensity tuples)</span>
+<span class="sd">        :return: list of centroided peaks (mz, intensity lists)</span>
 
 <span class="sd">        Example:</span>
 
@@ -682,7 +742,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaksSortedByI</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaksSortedByI</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaksSortedByI</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">key</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_centroidedPeaksSortedByI</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:]</span>
 </div>
 <div class="viewcode-block" id="Spectrum.estimatedNoiseLevel"><a class="viewcode-back" href="../spec.html#spec.Spectrum.estimatedNoiseLevel">[docs]</a>    <span class="k">def</span> <span class="nf">estimatedNoiseLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;median&#39;</span><span class="p">):</span>
@@ -696,14 +756,15 @@
             <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;median&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;median&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_median</span><span class="p">([</span> <span class="n">i</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">])</span>
+                <span class="c"># print(self.centroidedPeaks[0])</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;median&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_median</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
             <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;mad&#39;</span><span class="p">:</span>
                 <span class="n">median</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimatedNoiseLevel</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s">&#39;median&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;mad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_median</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;mad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_median</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span>
             <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;mean&#39;</span><span class="p">:</span>
-                <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">))</span>
+                <span class="n">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">))</span>
                 <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span>
-                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;variance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">i</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">))</span>
+                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="s">&#39;variance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">i</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="s">&quot;dont understand noise level estimation method call&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;noiseLevelEstimate&#39;</span><span class="p">][</span><span class="n">mode</span><span class="p">]</span>
@@ -711,6 +772,9 @@
     <span class="k">def</span> <span class="nf">_median</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(()):</span>
+            <span class="c"># ugly hack ... centroided returns tuple, should maybe be list of two lists after all </span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">data</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
@@ -724,32 +788,36 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the reprofiled version of a centroided spectrum.</span>
 
-<span class="sd">        :rtype: list of reprofiled mz,i tuples</span>
-<span class="sd">        :return: Reprofiled peaks as tuple list</span>
+<span class="sd">        :rtype: list of reprofiled mz,i lists</span>
+<span class="sd">        :return: Reprofiled peaks as two lists of mz and intensity values</span>
 
 <span class="sd">        Example:</span>
 
 <span class="sd">        &gt;&gt;&gt; import pymzml</span>
 <span class="sd">        &gt;&gt;&gt; run = pymzml.run.Reader(spectra.mzMl.gz, MS1_Precision = 5e-6, MSn_Precision = 20e-6)</span>
 <span class="sd">        &gt;&gt;&gt; for spectrum in run:</span>
-<span class="sd">        ...     for mz, i in spectrum.reprofiledPeaks:</span>
+<span class="sd">        ...     for pos, mz in enumerate(spectrum.reprofiledPeaks[0]):</span>
+<span class="sd">        ...         i = spectrum.reprofiledPeaks[1][ pos ]</span>
 <span class="sd">        ...         print(mz, i)</span>
 
+
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c">#NOTE self._reprofiledPeaks is a defaultdict(int) with k:mz, v:i</span>
+        <span class="c">#</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mz</span> <span class="o">!=</span> <span class="p">[]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reprofile_Peaks</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[],</span> <span class="p">[]</span> <span class="p">]</span>
+        <span class="c"># return sorted(self._reprofiledPeaks.items())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reprofiledPeaks</span>
 </div>
     <span class="k">def</span> <span class="nf">_reprofile_Peaks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs reprofiling for property :py:func:`reprofiledPeaks`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">mz</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">i</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
             <span class="c"># Let&#39;s say the measured precision is 1 sigma of the signal width, i.e. 68.4%</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">mz</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">measuredPrecision</span>
             <span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="n">s</span>
@@ -763,7 +831,7 @@
                     <span class="n">tmp</span><span class="p">[</span> <span class="n">a</span> <span class="p">]</span> <span class="o">+=</span> <span class="n">y</span>
                     <span class="c">#print(&quot;a&quot;, a)</span>
         <span class="bp">self</span><span class="p">[</span><span class="s">&#39;reprofiled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="n">tmp</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">tmp</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">measuredPrecision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -929,10 +997,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformedMzWithError</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_transformedMzWithError</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
                 <span class="k">for</span> <span class="n">t_mz_with_error</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">mz</span> <span class="o">-</span> <span class="p">(</span><span class="n">mz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">measuredPrecision</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">internalPrecision</span><span class="p">)),</span>
                                              <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">mz</span> <span class="o">+</span> <span class="p">(</span><span class="n">mz</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">measuredPrecision</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">internalPrecision</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_transformedMzWithError</span><span class="p">[</span><span class="n">t_mz_with_error</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_transformedMzWithError</span><span class="p">[</span><span class="n">t_mz_with_error</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformedMzWithError</span>
 
     <span class="nd">@property</span>
@@ -964,7 +1033,12 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">transformMZ</span><span class="p">(</span><span class="n">mz</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[],</span> <span class="p">[]</span> <span class="p">]</span>
+            <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centroidedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformMZ</span><span class="p">(</span><span class="n">mz</span><span class="p">)</span> <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">i</span> <span class="p">)</span>
+            <span class="c"># self._transformedPeaks = [(self.transformMZ(mz), i) for mz, i in self.centroidedPeaks]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformedPeaks</span>
 </div>
     <span class="nd">@property</span>
@@ -1287,10 +1361,12 @@
         <span class="n">vector1</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="n">vector2</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="n">mzs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
             <span class="n">vector1</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">i</span>
             <span class="n">mzs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">mz</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">spec2</span><span class="o">.</span><span class="n">peaks</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spec2</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">peaks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span> <span class="n">pos</span> <span class="p">]</span>
             <span class="n">vector2</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">i</span>
             <span class="n">mzs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">mz</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
@@ -1349,6 +1425,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xmlTree</span> <span class="o">=</span> <span class="n">treeObject</span>
+
         <span class="c">#</span>
         <span class="k">if</span> <span class="n">treeObject</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;}chromatogram&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">treeObject</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
@@ -1416,11 +1493,20 @@
                     <span class="k">if</span> <span class="n">subElement</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;cvParam&#39;</span><span class="p">):</span>
                         <span class="n">accession</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;accession&#39;</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">accession</span> <span class="o">==</span> <span class="s">&#39;MS:1000040&#39;</span><span class="p">:</span>
-                            <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">))</span>
+                            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">accession</span> <span class="o">==</span> <span class="s">&#39;MS:1000041&#39;</span><span class="p">:</span>
-                            <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">))</span>
+                            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
                         <span class="k">elif</span> <span class="n">accession</span> <span class="o">==</span> <span class="s">&#39;MS:1000744&#39;</span><span class="p">:</span>
-                            <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">))</span>
+                            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="p">[</span><span class="s">&#39;precursors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s">&#39;mz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subElement</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;value&#39;</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="k">pass</span>
 
@@ -1429,6 +1515,7 @@
                                 <span class="n">value</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
                                 <span class="n">name</span>  <span class="o">=</span> <span class="s">&#39;encodedData&#39;</span>
                     <span class="p">)</span>
+
 
             <span class="k">elif</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;selectedIon&#39;</span><span class="p">):</span>
                 <span class="k">if</span> <span class="s">&#39;MS:1000040&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -1448,7 +1535,7 @@
                     <span class="k">pass</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">pass</span>
-
+            
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s">&#39;ms level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">measuredPrecision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="s">&#39;MS1_Precision&#39;</span><span class="p">]</span>
@@ -1501,7 +1588,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

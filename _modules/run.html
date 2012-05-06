@@ -68,7 +68,7 @@
 
 <span class="c"># pymzml</span>
 <span class="c">#</span>
-<span class="c"># Copyright (C) 2010-2011 T. Bald, J. Barth, M. Specht, C. Fufezan</span>
+<span class="c"># Copyright (C) 2010-2011 T. Bald, J. Barth, A. Niehues, M. Specht, C. Fufezan</span>
 <span class="c">#</span>
 <span class="c">#    This program is free software: you can redistribute it and/or modify</span>
 <span class="c">#    it under the terms of the GNU General Public License as published by</span>
@@ -199,7 +199,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;offsets&#39;</span><span class="p">][</span><span class="s">&#39;TIC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> <span class="c"># max 10kbyte</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span> <span class="o">-</span><span class="mi">1024</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span> <span class="o">-</span><span class="mi">1024</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c"># File smaller than 10kb ...</span>
+                    <span class="k">break</span>
                 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="p">:</span>
                     <span class="n">match</span> <span class="o">=</span> <span class="n">chromatogramOffsetPattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
                     <span class="c">#print(_, line)</span>
@@ -229,6 +233,8 @@
                 <span class="c">##  &lt;offset idRef=&quot;SIM SIC 651.5&quot;&gt;330223452&lt;/offset&gt;\n&#39;</span>
                 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="p">:</span>
                     <span class="n">match_spec</span> <span class="o">=</span> <span class="n">spectrumIndexPattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">match_spec</span> <span class="ow">and</span> <span class="n">match_spec</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;nativeID&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;&#39;</span><span class="p">:</span>
+                        <span class="n">match_spec</span> <span class="o">=</span> <span class="bp">None</span>
                     <span class="n">match_sim</span>  <span class="o">=</span> <span class="n">simIndexPattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">match_spec</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;offsets&#39;</span><span class="p">][</span> <span class="nb">int</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span> <span class="n">match_spec</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;nativeID&#39;</span><span class="p">)))</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span> <span class="n">match_spec</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;offset&#39;</span><span class="p">)))</span>
@@ -306,10 +312,10 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">event</span><span class="p">,</span> <span class="n">element</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="c">#self.root.clear() #NOTE can be implemented and probably has to be implemented ...</span>
+            <span class="n">event</span><span class="p">,</span> <span class="n">element</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iter</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;END&#39;</span><span class="p">,</span><span class="s">&#39;END&#39;</span><span class="p">))</span>
+            <span class="c"># error? check cElementTree; conversion of data to 32bit-float mzml files might help</span>
+            <span class="c"># stop iteration when parsing is done</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s">&#39;END&#39;</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">StopIteration</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;}spectrum&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;}chromatogram&#39;</span><span class="p">)</span> <span class="p">)</span> <span class="ow">and</span> <span class="n">event</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;end&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">spectrum</span><span class="o">.</span><span class="n">initFromTreeObject</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
@@ -538,7 +544,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
