@@ -200,10 +200,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> <span class="c"># max 10kbyte</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span> <span class="o">-</span><span class="mi">1024</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span> <span class="o">-</span><span class="mi">1024</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="c"># File smaller than 10kb ...</span>
                     <span class="k">break</span>
+                    <span class="c"># File is smaller than 10kbytes ...  </span>
                 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seeker</span><span class="p">:</span>
                     <span class="n">match</span> <span class="o">=</span> <span class="n">chromatogramOffsetPattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
                     <span class="c">#print(_, line)</span>
@@ -544,7 +544,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011, Till Bald, Johannes Barth, Anna Niehues, Michael Specht, Michael Hippler, Christian Fufezan.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
 </html>
