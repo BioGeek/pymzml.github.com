@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -122,7 +121,7 @@ the <a class="reference internal" href="plot.html#module-plot" title="plot"><tt 
 estimation of similarity of spectra, simple noise reduction, addition of spectra
 and simple arithmetics on the intensity values by multiplication or division.
 An averaged spectrum can be created during parsing as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">pymzml</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">( measuredPrecision = 20e-6 )</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">msrun</span><span class="p">:</span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;ms level&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">t</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">/</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;total ion current&#39;</span><span class="p">]</span>
